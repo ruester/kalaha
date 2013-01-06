@@ -55,6 +55,11 @@ public class Server implements ServerInterface{
         return NetworkConnectionEnum.SERVER_STOPPED;
     }
 
+    public NetworkConnectionEnum restart() {
+        stop();
+        return start();
+    }
+
     public NetworkObject waitForMessage(){
         NetworkObject no = null;
         try {

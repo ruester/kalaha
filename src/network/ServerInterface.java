@@ -18,6 +18,12 @@ public interface ServerInterface {
     public NetworkConnectionEnum start();
 
     /**
+     * restart the server
+     * @return SERVER_STARTED if successful
+     */
+    public NetworkConnectionEnum restart();
+
+    /**
      * stop the server
      * @return SERVER_STOPPED if successful
      */
