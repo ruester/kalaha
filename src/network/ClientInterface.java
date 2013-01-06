@@ -19,6 +19,12 @@ public interface ClientInterface {
     public NetworkConnectionEnum connect();
 
     /**
+     * reconnect to server
+     * @return CONNECTED if successful
+     */
+    public NetworkConnectionEnum reconnect();
+
+    /**
      * disconnect from the server
      * @return DISCONNECTED if successful
      */

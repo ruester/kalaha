@@ -57,6 +57,11 @@ public class Client implements ClientInterface{
         return NetworkConnectionEnum.DISCONNECTED;
     }
 
+    public NetworkConnectionEnum reconnect() {
+        disconnect();
+        return connect();
+    }
+
     public NetworkObject waitForMessage(){
         NetworkObject no = null;
         try {
@@ -78,5 +83,4 @@ public class Client implements ClientInterface{
         }
         return NetworkConnectionEnum.MESSAGE_SENDED;
     }
-
 }
