@@ -1,6 +1,5 @@
 package network;
 
-import java.io.IOException;
 
 public interface ClientInterface {
 
@@ -27,11 +26,9 @@ public interface ClientInterface {
 
     /**
      * listening on the port and waits for a NetworkObject
-     * @return the received NetworkObject
-     * @throws IOException
-     * @throws ClassNotFoundException when the type of the message is not NetworkObject
+     * @return the received NetworkObject or null
      */
-    public NetworkObject waitForMessage() throws IOException, ClassNotFoundException;
+    public NetworkObject waitForMessage();
 
     /**
      * send a NetworkObject to the server

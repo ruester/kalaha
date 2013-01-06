@@ -55,8 +55,16 @@ public class Server implements ServerInterface{
         return NetworkConnectionEnum.SERVER_STOPPED;
     }
 
-    public NetworkObject waitForMessage() throws IOException, ClassNotFoundException {
-        return (NetworkObject)in.readObject();
+    public NetworkObject waitForMessage(){
+        NetworkObject no = null;
+        try {
+            no = (NetworkObject)in.readObject();
+        } catch (IOException e) {
+            //do nothing
+        } catch (ClassNotFoundException e) {
+            //do nothing
+        }
+        return no;
     }
 
     public NetworkConnectionEnum sendMessage(NetworkObject message) {
