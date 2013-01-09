@@ -15,7 +15,7 @@ public enum NetworkConnectionEnum {
 
   //both
     //Errors:
-    SREAM_ERROR, SEND_MESSAGE_ERROR, MESSAGE_TYPE_ERROR,
+    STREAM_ERROR, SEND_MESSAGE_ERROR, MESSAGE_TYPE_ERROR,
     //all right
     MESSAGE_SENDED
 }
