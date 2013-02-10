@@ -1,6 +1,3 @@
-package network;
-
-
 public interface ServerInterface {
 
     /**

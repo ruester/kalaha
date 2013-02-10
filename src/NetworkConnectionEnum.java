@@ -1,5 +1,3 @@
-package network;
-
 public enum NetworkConnectionEnum {
   //Server:
     //Errors:

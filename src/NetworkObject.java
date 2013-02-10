@@ -1,5 +1,3 @@
-package network;
-
 import java.io.Serializable;
 
 public class NetworkObject implements Serializable{
