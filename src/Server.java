@@ -38,7 +38,7 @@ public class Server implements ServerInterface{
         try {
             initStreams();
         } catch (IOException e) {
-            return NetworkConnectionEnum.SREAM_ERROR;
+            return NetworkConnectionEnum.STREAM_ERROR;
         }
 
         return NetworkConnectionEnum.SERVER_STARTED;

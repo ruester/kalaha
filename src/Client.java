@@ -40,7 +40,7 @@ public class Client implements ClientInterface{
         try {
             initStreams();
         } catch (IOException e) {
-            return NetworkConnectionEnum.SREAM_ERROR;
+            return NetworkConnectionEnum.STREAM_ERROR;
         }
 
         return NetworkConnectionEnum.CONNECTED;
