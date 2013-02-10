@@ -1,41 +1,41 @@
 public interface ServerInterface {
 
-    /**
-     * start a server
-     * @param port - listening on the port
-     * @return SERVER_STARTED if successful
-     */
-    public NetworkConnectionEnum start(int port);
+	/**
+	 * start a server
+	 * return values:
+	 * SERVER_START_ERROR, STREAM_ERROR or SERVER_STARTED
+	 */
+	public NetworkConnectionEnum start(int port);
 
-    /**
-     * start a server
-     * port default is 1234
-     * @return SERVER_STARTED if successful
-     */
-    public NetworkConnectionEnum start();
+	/**
+	 * same as start(1234)
+	 */
+	public NetworkConnectionEnum start();
 
-    /**
-     * restart the server
-     * @return SERVER_STARTED if successful
-     */
-    public NetworkConnectionEnum restart();
+	/**
+	 * restart the server
+	 * return values same as start()
+	 */
+	public NetworkConnectionEnum restart();
 
-    /**
-     * stop the server
-     * @return SERVER_STOPPED if successful
-     */
-    public NetworkConnectionEnum stop();
+	/**
+	 * stop the server
+	 * return values:
+	 * SERVER_STOP_ERROR or SERVER_STOPPED
+	 */
+	public NetworkConnectionEnum stop();
 
-    /**
-     * listening on the port and waits for a NetworkObject
-     * @return the received NetworkObject or null
-     */
-    public NetworkObject waitForMessage();
+	/**
+	 * listening on the port and wait for a NetworkObject
+	 * not null: the received NetworkObject
+	 * null:     object could not be received
+	 */
+	public NetworkObject waitForMessage();
 
-    /**
-     * send a NetworkObject to the client
-     * @param message - NetworkObject to send
-     * @return MESSAGE_SENDED if successful
-     */
-    public NetworkConnectionEnum sendMessage(NetworkObject message);
+	/**
+	 * send a NetworkObject to the client
+	 * return values:
+	 * SEND_MESSAGE_ERROR or MESSAGE_SENDED
+	 */
+	public NetworkConnectionEnum sendMessage(NetworkObject message);
 }

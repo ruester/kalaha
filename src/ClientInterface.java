@@ -1,42 +1,41 @@
 public interface ClientInterface {
+	/**
+	 * create a connection to a server
+	 * return values:
+	 * SERVER_NOT_FOUND, CONNECTION_FAILED or CONNECTED
+	 */
+	public NetworkConnectionEnum connect(String ip, int port);
 
-    /**
-     * create a connection to a server
-     * @param ip - ip of the server
-     * @param port - port of the server
-     * @return CONNECTED if successful
-     */
-    public NetworkConnectionEnum connect(String ip, int port);
-    /**
-     * create a connection to a server
-     * ip of the server is Localhost
-     * port of the server is 1234
-     * @return CONNECTED if successful
-     */
-    public NetworkConnectionEnum connect();
+	/**
+	 * same as connect("localhost", 1234)
+	 */
+	public NetworkConnectionEnum connect();
 
-    /**
-     * reconnect to server
-     * @return CONNECTED if successful
-     */
-    public NetworkConnectionEnum reconnect();
+	/**
+	 * reconnect to server
+	 * return values same as connect()
+	 */
+	public NetworkConnectionEnum reconnect();
 
-    /**
-     * disconnect from the server
-     * @return DISCONNECTED if successful
-     */
-    public NetworkConnectionEnum disconnect();
+	/**
+	 * disconnect from the server
+	 * return values:
+	 * CLIENT_STOP_ERROR or DISCONNECTED
+	 */
+	public NetworkConnectionEnum disconnect();
 
-    /**
-     * listening on the port and waits for a NetworkObject
-     * @return the received NetworkObject or null
-     */
-    public NetworkObject waitForMessage();
+	/**
+	 * listening on the port and wait for a NetworkObject
+	 * return values:
+	 * not null: the received NetworkObject
+	 * null:     object could not be received
+	 */
+	public NetworkObject waitForMessage();
 
-    /**
-     * send a NetworkObject to the server
-     * @param message - NetworkObject to send
-     * @return MESSAGE_SENDED if successful
-     */
-    public NetworkConnectionEnum sendMessage(NetworkObject message);
+	/**
+	 * send a NetworkObject to the server
+	 * return values:
+	 * SEND_MESSAGE_ERROR or MESSAGE_SENDED
+	 */
+	public NetworkConnectionEnum sendMessage(NetworkObject message);
 }

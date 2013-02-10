@@ -5,80 +5,80 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class Client implements ClientInterface{
+	private int port;
+	private String serverIP;
+	private Socket s;
+	private ObjectInputStream in;
+	private ObjectOutputStream out;
 
-    private int port = 1234;
-    private String serverIP = "Localhost";
-    private Socket s = null;
-    private ObjectInputStream in = null;
-    private ObjectOutputStream out = null;
+	public Client() {
+		port = 1234;
+		serverIP = "localhost";
+	}
 
-    /**
-     * initializes the streams
-     * @throws IOException
-     */
-    private void initStreams() throws IOException{
-        out = new ObjectOutputStream(s.getOutputStream());
-        out.flush();
-        in = new ObjectInputStream(s.getInputStream());
-    }
+	private void initStreams() throws IOException{
+		out = new ObjectOutputStream(s.getOutputStream());
+		in  = new ObjectInputStream(s.getInputStream());
+		out.flush();
+	}
 
-    public NetworkConnectionEnum connect(String ip, int port) {
-        serverIP = ip;
-        this.port = port;
-        return connect();
-    }
+	public NetworkConnectionEnum connect(String ip, int port) {
+		serverIP  = ip;
+		this.port = port;
+		return connect();
+	}
 
-    public NetworkConnectionEnum connect() {
-        try {
-            s = new Socket(serverIP, port);
-        } catch (UnknownHostException e) {
-            return NetworkConnectionEnum.SERVER_NOT_FOUND;
-        } catch (IOException e) {
-            return NetworkConnectionEnum.CONNECTION_FAILED;
-        }
+	public NetworkConnectionEnum connect() {
+		try {
+			s = new Socket(serverIP, port);
+		} catch (UnknownHostException e) {
+			return NetworkConnectionEnum.SERVER_NOT_FOUND;
+		} catch (IOException e) {
+			return NetworkConnectionEnum.CONNECTION_FAILED;
+		}
 
-        try {
-            initStreams();
-        } catch (IOException e) {
-            return NetworkConnectionEnum.STREAM_ERROR;
-        }
+		try {
+			initStreams();
+		} catch (IOException e) {
+			return NetworkConnectionEnum.STREAM_ERROR;
+		}
 
-        return NetworkConnectionEnum.CONNECTED;
-    }
+		return NetworkConnectionEnum.CONNECTED;
+	}
 
-    public NetworkConnectionEnum disconnect() {
-        try {
-            s.close();
-        } catch (IOException e) {
-            return NetworkConnectionEnum.CLIENT_STOP_ERROR;
-        }
-        return NetworkConnectionEnum.DISCONNECTED;
-    }
+	public NetworkConnectionEnum disconnect() {
+		try {
+			s.close();
+		} catch (IOException e) {
+			return NetworkConnectionEnum.CLIENT_STOP_ERROR;
+		}
 
-    public NetworkConnectionEnum reconnect() {
-        disconnect();
-        return connect();
-    }
+		return NetworkConnectionEnum.DISCONNECTED;
+	}
 
-    public NetworkObject waitForMessage(){
-        NetworkObject no = null;
-        try {
-            no = (NetworkObject)in.readObject();
-        } catch (IOException e) {
-            //do nothing
-        } catch (ClassNotFoundException e) {
-            //do nothing
-        }
-        return no;
-    }
+	public NetworkConnectionEnum reconnect() {
+		disconnect();
+		return connect();
+	}
 
-    public NetworkConnectionEnum sendMessage(NetworkObject message) {
-        try {
-            out.writeObject(message);
-            out.flush();
-        } catch (IOException e) {
-            return NetworkConnectionEnum.SEND_MESSAGE_ERROR;
-        }
-        return NetworkConnectionEnum.MESSAGE_SENDED;
-    }
+	public NetworkObject waitForMessage(){
+		NetworkObject no = null;
+
+		try {
+			no = (NetworkObject) in.readObject();
+		} catch (Exception e) { }
+
+		return no;
+	}
+
+	public NetworkConnectionEnum sendMessage(NetworkObject message) {
+		try {
+			out.writeObject(message);
+			out.flush();
+		} catch (IOException e) {
+			return NetworkConnectionEnum.SEND_MESSAGE_ERROR;
+		}
+
+		return NetworkConnectionEnum.MESSAGE_SENDED;
+	}
 }

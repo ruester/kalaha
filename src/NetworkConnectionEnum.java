@@ -1,19 +1,18 @@
 public enum NetworkConnectionEnum {
-  //Server:
-    //Errors:
-    PORT_ERROR, SERVER_START_ERROR, SERVER_STOP_ERROR,
-    //all right
-    SERVER_STOPPED, SERVER_STARTED,
+	// server
+	PORT_ERROR, SERVER_START_ERROR, SERVER_STOP_ERROR,
 
-  //Client:
-    //Errors:
-    SERVER_NOT_FOUND, CONNECTION_FAILED, CLIENT_STOP_ERROR,
-    //all right
-    CONNECTED, DISCONNECTED,
+	SERVER_STOPPED, // server stopped successfully
+	SERVER_STARTED, // server started successfully
 
-  //both
-    //Errors:
-    STREAM_ERROR, SEND_MESSAGE_ERROR, MESSAGE_TYPE_ERROR,
-    //all right
-    MESSAGE_SENDED
+	// client
+	SERVER_NOT_FOUND, CONNECTION_FAILED, CLIENT_STOP_ERROR,
+
+	CONNECTED,    // client connected successfully
+	DISCONNECTED, // client disconnected successfully
+
+	// both
+	STREAM_ERROR, SEND_MESSAGE_ERROR, MESSAGE_TYPE_ERROR,
+
+	MESSAGE_SENDED // message sent successfully
 }
